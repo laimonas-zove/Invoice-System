@@ -1,0 +1,106 @@
+{% extends 'base_index.html' %} {% block content %} {% with messages =
+get_flashed_messages(with_categories=true) %} {% if messages %}
+<div class="flash-container">
+  {% for category, message in messages %}
+  <div class="flash {{ category }}">
+    {{ message }}
+    <button
+      class="close-btn"
+      onclick="this.parentElement.style.display='none';"
+    >
+      &times;
+    </button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %} {% endwith %}
+
+<div class="table-title">
+  <h2>Nauja Sąskaita</h2>
+</div>
+
+<form
+  method="POST"
+  action="{{ url_for('new_invoice') }}"
+  class="invoice-container"
+>
+  {{ form.hidden_tag() }}
+
+  <div class="form-row">
+    <label>Klientas:<span style="color: red">*</span></label>
+    {{ form.client_id(class_="form-field") }}
+  </div>
+
+  <div class="table-title">
+    <h4>Paslaugos</h4>
+    <div class="add-new">
+      <button type="button" onclick="addItem()" class="add-button">+</button>
+    </div>
+  </div>
+
+  <div id="items-container">
+    {% for subform in form.items %}
+    <div class="item-row">
+      <div class="service-row">
+        <label>Paslauga:<span style="color: red">*</span></label>
+        {{ subform.service(class_="form-field") }}
+      </div>
+
+      <div class="price-quantity">
+        <div class="form-row">
+          <label>Kiekis:<span style="color: red">*</span></label>
+          {{ subform.quantity(class_="form-field") }}
+        </div>
+
+        <div class="form-row">
+          <label>Kaina:<span style="color: red">*</span></label>
+          {{ subform.price(class_="form-field") }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {{ form.submit(class_="form-button", value='Įrašyti') }}
+</form>
+
+<script>
+  let itemIndex = {{ form.items|length }};
+
+  function addItem() {
+    const container = document.getElementById("items-container");
+    const row = document.createElement("div");
+    row.className = "item-row";
+
+    row.innerHTML = `
+      <div class="service-row">
+        <label>Paslauga:<span style="color: red">*</span></label>
+        <textarea name="items-${itemIndex}-service" class="form-field" required></textarea>
+      </div>
+
+      <div class="price-quantity">
+        <div class="form-row">
+          <label>Kiekis:<span style="color: red">*</span></label>
+          <input type="number" name="items-${itemIndex}-quantity" class="form-field" required>
+        </div>
+
+        <div class="form-row">
+          <label>Kaina:<span style="color: red">*</span></label>
+          <input type="number" step="any" name="items-${itemIndex}-price" class="form-field" required>
+        </div>
+      </div>
+
+      <button type="button" class="remove-button" onclick="removeItem(this)">❌</button>
+    `;
+
+    container.appendChild(row);
+    itemIndex++;
+  }
+
+  function removeItem(button) {
+    const row = button.closest(".item-row");
+    row.remove();
+  }
+</script>
+
+{% endblock %}

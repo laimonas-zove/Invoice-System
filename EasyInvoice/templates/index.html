@@ -1,0 +1,35 @@
+{% extends 'base_index.html' %} {% block content %} {% with messages =
+get_flashed_messages(with_categories=true) %} {% if messages %}
+<div class="flash-container">
+  {% for category, message in messages %}
+  <div class="flash {{ category }}">
+    {{ message }}
+    <button
+      class="close-btn"
+      onclick="this.parentElement.style.display='none';"
+    >
+      &times;
+    </button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %} {% endwith %}
+
+<div class="index-body">
+  <img
+    src="{{ url_for('static', filename='images/logo_dark.png') }}"
+    alt="Logo"
+    class="index-img"
+  />
+  <h2>Tai įrankis skirtas lengvai ir greitai sukurti</br> 
+    Sąskaitas - Faktūras</h2>
+  <ul>
+    <li>
+      Sąskaitos - Pridėkite naujas sąskaitas, redaguokite arba atsisiųskite jau
+      sukurtas sąskaitas
+    </li>
+    <li>Klientai - Pridėkite naujus arba redaguokite esamus klientus</li>
+    <li>Pardavėjai - Pridėkite naujus arba redaguokite esamus klientus</li>
+  </ul>
+</div>
+{% endblock %}

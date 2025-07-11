@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EasyInvoice</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/base.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="nav-bar">
+        <div class="logo">
+          <a href="{{ url_for('index') }}"
+            ><img
+              src="{{ url_for('static', filename='images/logo_white.png') }}"
+              alt="Logo"
+          /></a>
+        </div>
+        <div class="nav-options">
+          <a href="{{ url_for('invoices') }}">Sąskaitos</a>
+          <a href="{{ url_for('clients') }}">Klientai</a>
+          <a href="{{ url_for('provider') }}">Pardavėjai</a>
+          <a
+            href="{{ url_for('quit') }}"
+            onclick="return confirm('Ar tikrai norite uždaryti programą?')"
+            >Uždaryti</a
+          >
+        </div>
+      </div>
+    </header>
+    <main>{% block content %}{% endblock %}</main>
+  </body>
+</html>

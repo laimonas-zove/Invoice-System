@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="lt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 10px;
+        letter-spacing: 0.66px;
+      }
+      .invoice-box {
+        background: #fff;
+        max-width: 100%;
+        margin: auto;
+      }
+      .invoice-box h1 {
+        margin: 0;
+        font-size: 24px;
+        line-height: 28px;
+      }
+      .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        border-collapse: collapse;
+        margin-top: 40px;
+      }
+      .invoice-box table td {
+        padding: 10px;
+      }
+      .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+        text-align: center;
+      }
+      .invoice-box table tr.item td {
+        border-bottom: 1px solid #eee;
+      }
+      .invoice-box table tr.total td:last-child {
+        font-weight: bold;
+        border-top: 2px solid #eee;
+      }
+      .invoice-footer {
+        margin-top: 30px;
+        font-size: 12px;
+        color: #666;
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      .item {
+        text-align: center;
+      }
+      .invoice-items-table td {
+        vertical-align: middle;
+        padding: 15px;
+        font-size: 14px;
+        table-layout: fixed;
+      }
+      .provider {
+        text-align: center;
+        font-style: italic;
+        color: #666;
+        margin-top: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-box">
+      <div class="header">
+        <h1>SĄSKAITA - FAKTŪRA</h1>
+        <p>
+          Serija {{ provider.name[0].upper() }}{{ provider.surname[0].upper() }}
+          Nr. {{ invoice.invoice_no }} <br />
+          {{ invoice.date }}
+        </p>
+      </div>
+
+      <table>
+        <tr class="seller-buyer-details">
+          <td>Pardavėjas</td>
+          <td>Pirkėjas</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px; letter-spacing: 0.5px; word-spacing: 0.1em">
+            <strong>{{ provider.name }} {{ provider.surname }}</strong><br />
+            <i>Individualios veiklos pažymėjimas Nr:</i> {{ provider.idv_no
+            }}<br />
+            <i>Adresas:</i> {{ provider.address }}<br />
+            <i>Bankas:</i> {{ provider.bank }}<br />
+            <i>Sąskaitos Nr.:</i> {{ provider.account_no | batch(4) |
+            map('join') | join(' ') }}
+          </td>
+          <td style="padding: 12px; letter-spacing: 0.5px; word-spacing: 0.1em">
+            <strong>{{ invoice.client.company }}</strong><br />
+            <i>Įmonės kodas:</i> {{ invoice.client.company_code }}<br />
+            <i>Adresas:</i> {{ invoice.client.address }}
+          </td>
+        </tr>
+      </table>
+
+      <table class="invoice-items-table">
+        <tr class="heading">
+          <td style="width: 20px">Eil. Nr.</td>
+          <td>Paslaugos pavadinimas</td>
+          <td style="width: 20px">Kiekis</td>
+          <td style="width: 80px">Kaina</td>
+          <td style="width: 80px">Suma</td>
+        </tr>
+
+        {% for item in invoice.items %}
+        <tr class="item">
+          <td>{{ loop.index }}.</td>
+          <td>{{ item.service }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ "%.2f"|format(item.price) }} €</td>
+          <td>{{ "%.2f"|format(item.sum) }} €</td>
+        </tr>
+        {% endfor %}
+
+        <tr class="total">
+          <td colspan="5" style="text-align: right">
+            Viso: {{ "%.2f"|format(total_sum) }} Eur ({{ sum_words }})
+          </td>
+        </tr>
+      </table>
+      <p class="provider">
+        Paslaugos tiekėjas: {{ provider.name }} {{ provider.surname }}
+      </p>
+    </div>
+  </body>
+</html>

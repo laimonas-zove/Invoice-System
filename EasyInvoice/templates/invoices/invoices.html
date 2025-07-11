@@ -1,0 +1,92 @@
+{% extends 'base_index.html' %} {% block content %} {% with messages =
+get_flashed_messages(with_categories=true) %} {% if messages %}
+<div class="flash-container">
+  {% for category, message in messages %}
+  <div class="flash {{ category }}">
+    {{ message }}
+    <button
+      class="close-btn"
+      onclick="this.parentElement.style.display='none';"
+    >
+      &times;
+    </button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %} {% endwith %}
+
+<div class="table-title">
+  <h1>Sąskaitos</h1>
+  <div class="add-new">
+    <a href="{{ url_for('new_invoice') }}">Pridėti</a>
+  </div>
+</div>
+<div class="table">
+  <table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+      <tr>
+        <th style="width: 35px">Sąskaitos Numeris</th>
+        <th style="min-width: 70px">Data</th>
+        <th style="width: 1000px">Paslaugos</th>
+        <th style="width: 200px">Gavėjas</th>
+        <th style="width: 10px" colspan="2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if invoices %} {% for invoice in invoices %}
+      <tr>
+        <td>{{ invoice.invoice_no }}</td>
+        <td>{{ invoice.date }}</td>
+        <td>
+          {% for item in invoice.items %} {{ item.service }}<br />
+          {% endfor %}
+        </td>
+        <td>{{ invoice.client.company }}</td>
+        <td>
+          <a
+            href="{{ url_for('edit_invoice', invoice_id=invoice.id) }}"
+            style="text-decoration: none"
+          >
+            📝
+          </a>
+        </td>
+        <td>
+          <a
+            href="{{ url_for('generate_invoice', invoice_id=invoice.id) }}"
+            style="text-decoration: none"
+          >
+            ⬇️
+          </a>
+        </td>
+      </tr>
+      {% endfor %} {% else %}
+      <tr>
+        <td colspan="5" style="text-align: center">Nėra išrašytų sąskaitų</td>
+      </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const showPdfInvoiceId = urlParams.get("show_pdf");
+
+    if (showPdfInvoiceId) {
+      const pdfUrl = `/saskaitos/pdf/${showPdfInvoiceId}`;
+      const popup = window.open(pdfUrl, "invoice_pdf");
+
+      const newUrl =
+        window.location.protocol +
+        "//" +
+        window.location.host +
+        window.location.pathname;
+      window.history.replaceState({ path: newUrl }, "", newUrl);
+
+      if (popup) {
+        popup.focus();
+      }
+    }
+  });
+</script>
+{% endblock %}

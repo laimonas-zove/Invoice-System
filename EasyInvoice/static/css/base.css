@@ -1,0 +1,321 @@
+body {
+    max-width: 2000px;
+    margin: auto;
+    font-family: "Poppins", sans-serif;
+}
+
+.nav-bar {
+    position: relative;
+    background-color: #12372a;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-radius: 10px;
+    height: 60px;
+    margin: 10px;
+}
+
+.logo {
+    position: absolute;
+    left: 20px;
+}
+
+.logo img {
+    width: 100px;
+}
+
+.nav-options {
+    display: flex;
+    gap: 20px;
+    margin-right: 20px;
+}
+
+.nav-options a {
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+}
+
+.nav-options a:hover {
+    background-color: #a8ad47;
+    transition: all 0.3s ease;
+}
+
+.add-new {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.add-new a {
+    width: 50px;
+    background-color: rgb(58, 188, 58);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    margin: auto;
+}
+
+.add-new a:hover {
+    background-color: rgb(56, 142, 56);
+    transition: ease 0.2s;
+}
+
+.invoice-container {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    margin: auto;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: auto;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.form-field,
+.form select {
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    border-width: 1px;
+}
+
+textarea {
+    height: 80px;
+}
+
+.form-row label {
+    font-size: 12px;
+    font-style: italic;
+}
+
+.form-row-static {
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.form-button {
+    background-color: rgb(58, 188, 58);
+    padding: 10px;
+    width: 200px;
+    margin: auto;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    color: white;
+}
+
+.add-button {
+    background-color: rgb(188, 173, 58);
+    padding: 10px;
+    width: 50px;
+    margin: auto;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    color: white;
+}
+
+.form-button:hover {
+    background-color: rgb(56, 142, 56);
+    transition: ease 0.2s;
+}
+
+.flash-container {
+    position: relative;
+}
+
+.flash {
+    position: relative;
+    font-size: 13px;
+    padding: 12px 40px 12px 18px;
+    margin: 10px 0;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.4s ease-in;
+    text-align: center;
+}
+
+.close-btn {
+    width: 20px;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: #ddd;
+}
+
+.flash.success {
+    background-color: #4CAF50;
+}
+
+.flash.error {
+    background-color: #F44336;
+}
+
+.index-body {
+    margin: auto;
+    max-width: 700px;
+}
+
+.index-img {
+    display: flex;
+    width: 300px;
+    margin: auto;
+}
+
+main {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+.table-title {
+    text-align: center;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}   
+
+.table {
+    overflow: auto;
+    width: 100%;
+    text-wrap: wrap;
+    word-wrap: break-word;
+}
+
+.table table {
+    background-color: rgb(244, 244, 244);
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 13px;
+    border: 1px solid black;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+table th:first-child {
+  border-top-left-radius: 10px;
+}
+
+table th:last-child {
+  border-top-right-radius: 10px;
+}
+
+table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+table td:not(:last-child),
+table th:not(:last-child) {
+    border-right: 1px solid black;
+}
+
+table tr:not(:last-child) td,
+table tr:not(:last-child) th {
+    border-bottom: 1px solid black;
+}
+
+table tr td,
+table tr th {
+    border-bottom: 1px solid black;
+}
+
+table tr, th, td {
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.index-body h2 {
+    text-align: center;
+}
+
+.remove-button {
+    position: absolute;
+    right: 0px;
+    top: 55px;
+    background: none;
+    border: none;
+    color: red;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+h4 {
+    text-align: center;
+}
+
+.service-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 500px;
+}
+
+.quantity-row,
+.price-row {
+    width: 50px;
+}
+
+.service-row label,
+.quantity-row label,
+.price-row label {
+    font-size: 12px;
+    font-style: italic;
+}
+
+.item-row {
+    position: relative;
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+#items-container {
+    padding: 20px;
+    border: solid 1px black;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    margin: auto;
+}

@@ -1,0 +1,49 @@
+{% extends 'base_index.html' %} {% block content %} {% with messages =
+get_flashed_messages(with_categories=true) %} {% if messages %}
+<div class="flash-container">
+  {% for category, message in messages %}
+  <div class="flash {{ category }}">
+    {{ message }}
+    <button
+      class="close-btn"
+      onclick="this.parentElement.style.display='none';"
+    >
+      &times;
+    </button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %} {% endwith %}
+
+<div class="table-title">
+  <h2>Redaguoti Klientą</h2>
+</div>
+<form
+  method="POST"
+  action="{{ url_for('edit_client', client_id=client.id) }}"
+  class="form-container"
+>
+  {{ form.hidden_tag() }}
+  <div class="form-row">
+    <label>Įmonė:<span style="color: red">*</span></label>
+    {{ form.company(class_="form-field") }}
+  </div>
+  <div class="form-row">
+    <label>Įmonės Kodas:<span style="color: red">*</span></label>
+    {{ form.company_code(class_="form-field") }}
+  </div>
+  <div class="form-row">
+    <label>Adresas:<span style="color: red">*</span></label>
+    {{ form.address(class_="form-field") }}
+  </div>
+  <div class="form-row">
+    <label>Telefono Numeris:</label>
+    {{ form.phone_number(class_="form-field") }}
+  </div>
+  <div class="form-row">
+    <label>El. Paštas:<span style="color: red">*</span></label>
+    {{ form.email(class_="form-field") }}
+  </div>
+  {{ form.submit(class_="form-button", value='Redaguoti') }}
+</form>
+{% endblock %}

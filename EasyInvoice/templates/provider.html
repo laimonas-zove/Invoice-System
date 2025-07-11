@@ -1,0 +1,56 @@
+{% extends 'base_index.html' %} {% block content %} {% with messages =
+get_flashed_messages(with_categories=true) %} {% if messages %}
+<div class="flash-container">
+  {% for category, message in messages %}
+  <div class="flash {{ category }}">
+    {{ message }}
+    <button
+      class="close-btn"
+      onclick="this.parentElement.style.display='none';"
+    >
+      &times;
+    </button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %} {% endwith %}
+<div class="table-title">
+  <h2>
+    {{ 'Redaguoti Pardavėjo Duomenis' if provider else 'Įvesti Pardavėjo
+    Duomenis' }}
+  </h2>
+</div>
+
+<form method="POST" action="{{ url_for('provider') }}" class="form-container">
+  {{ form.hidden_tag() }} {% if provider %}
+  <div class="form-row-static">{{ provider.name }} {{ provider.surname }}</div>
+  {% else %}
+  <div class="form-row">
+    <label>Vardas:</label>
+    {{ form.name(class_="form-field") }}
+  </div>
+  <div class="form-row">
+    <label>Pavardė:</label>
+    {{ form.surname(class_="form-field") }}
+  </div>
+  {% endif %}
+  <div class="form-row">
+    <label>Adresas:</label>
+    {{ form.address(class_="form-field") }}
+  </div>
+  <div class="form-row">
+    <label>IDV Numeris:</label>
+    {{ form.idv_no(class_="form-field") }}
+  </div>
+  <div class="form-row">
+    <label>Bankas:</label>
+    {{ form.bank(class_="form-field") }}
+  </div>
+  <div class="form-row">
+    <label>Sąskaitos Numeris:</label>
+    {{ form.account_no(class_="form-field") }}
+  </div>
+  {{ form.submit(class_="form-button", value='Redaguoti' if provider else
+  'Įrašyti') }}
+</form>
+{% endblock %}
