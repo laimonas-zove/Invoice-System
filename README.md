@@ -67,6 +67,7 @@ Install Required Dependencies
 
 ```bash
   pip install -r requirements.txt
+  playwright install chromium
 ```
 
 Start the server
