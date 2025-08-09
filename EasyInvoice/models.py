@@ -37,6 +37,7 @@ class InvoiceItem(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     service = db.Column(db.String, nullable=False)
+    hours = db.Column(db.String, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
     sum = db.Column(db.Float, nullable=False)

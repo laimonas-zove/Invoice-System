@@ -49,6 +49,7 @@ def new_invoice():
         for item_form in form.items.entries:
             item = InvoiceItem(
                 service=item_form.form.service.data,
+                hours=item_form.form.hours.data,
                 quantity=item_form.form.quantity.data,
                 price=item_form.form.price.data,
                 sum=item_form.form.quantity.data * item_form.form.price.data,
@@ -98,6 +99,7 @@ def edit_invoice(invoice_id: int) -> Response:
         for item_form in form.items.entries:
             new_item = InvoiceItem(
                 service=item_form.form.service.data,
+                hours=item_form.form.hours.data,
                 quantity=item_form.form.quantity.data,
                 price=item_form.form.price.data,
                 sum=item_form.form.quantity.data * item_form.form.price.data,

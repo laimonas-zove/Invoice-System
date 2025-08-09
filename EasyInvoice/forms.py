@@ -16,6 +16,7 @@ class InvoiceItemForm(FlaskForm):
         csrf = False
         
     service = TextAreaField("Paslauga", validators=[DataRequired()])
+    hours = IntegerField("Akademinės val.", validators=[DataRequired()])
     quantity = IntegerField("Kiekis", validators=[DataRequired()])
     price = FloatField("Kaina", validators=[DataRequired()])
 

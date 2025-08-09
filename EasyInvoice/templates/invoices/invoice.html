@@ -106,6 +106,7 @@
         <tr class="heading">
           <td style="width: 20px">Eil. Nr.</td>
           <td>Paslaugos pavadinimas</td>
+          <td style="width: 20px">Akad. val.</td>
           <td style="width: 20px">Kiekis</td>
           <td style="width: 80px">Kaina</td>
           <td style="width: 80px">Suma</td>
@@ -115,6 +116,7 @@
         <tr class="item">
           <td>{{ loop.index }}.</td>
           <td>{{ item.service }}</td>
+          <td>{{ item.hours }}</td>
           <td>{{ item.quantity }}</td>
           <td>{{ "%.2f"|format(item.price) }} €</td>
           <td>{{ "%.2f"|format(item.sum) }} €</td>
@@ -122,7 +124,7 @@
         {% endfor %}
 
         <tr class="total">
-          <td colspan="5" style="text-align: right">
+          <td colspan="6" style="text-align: right">
             Viso: {{ "%.2f"|format(total_sum) }} Eur ({{ sum_words }})
           </td>
         </tr>

@@ -48,6 +48,11 @@ get_flashed_messages(with_categories=true) %} {% if messages %}
 
       <div class="price-quantity">
         <div class="form-row">
+          <label>Akad. Val.:<span style="color: red">*</span></label>
+          {{ subform.hours(class_="form-field") }}
+        </div>
+
+        <div class="form-row">
           <label>Kiekis:<span style="color: red">*</span></label>
           {{ subform.quantity(class_="form-field") }}
         </div>
@@ -82,6 +87,11 @@ get_flashed_messages(with_categories=true) %} {% if messages %}
       </div>
 
       <div class="price-quantity">
+        <div class="form-row">
+          <label>Akad. Val.:<span style="color: red">*</span></label>
+          <input type="number" name="items-${itemIndex}-hours" class="form-field" required>
+        </div>
+
         <div class="form-row">
           <label>Kiekis:<span style="color: red">*</span></label>
           <input type="number" name="items-${itemIndex}-quantity" class="form-field" required>
